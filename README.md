@@ -1,14 +1,34 @@
-# Next.js + Claude Code Template
+# Next.js + Claude Code Template 🚀
 
-A powerful **Next.js 15** template with **Claude Code superpowers** - enabling autonomous database management, workflow automation, and AI-assisted development.
+A **cutting-edge Next.js 15 template** with **Claude Code superpowers** - featuring autonomous database management, complete authentication system, modern UI design, and AI-assisted development workflows.
+
+[![CI](https://github.com/MaximeNollevaux/nextjs-claude-template/actions/workflows/ci.yml/badge.svg)](https://github.com/MaximeNollevaux/nextjs-claude-template/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Features
 
 ### 🤖 Claude Code Integration
 - **Database Autonomy**: Claude Code can autonomously modify your Supabase schema
-- **Custom Slash Commands**: Productivity-boosting commands like `/epct`, `/explore`, `/commit`
+- **5 Slash Commands**: `/commit`, `/epct`, `/create-pr`, `/fix`, `/review`
 - **MCP Servers**: Pre-configured for Supabase and N8N integration
 - **Autonomous Migrations**: Create, test, and deploy database changes safely
+- **GitHub Actions**: Automated CI/CD and PR management
+
+### 🔐 Authentication (NEW!)
+- **Complete auth system** with Supabase Auth
+- Login & Signup pages with glass morphism design
+- Protected routes with middleware
+- Auth hooks (`useAuth`)
+- Session management
+- Email verification
+
+### 🎨 Modern UI (2025 Design)
+- **Glass morphism** design language
+- **Dark mode** by default
+- Gradient backgrounds
+- Smooth transitions and hover effects
+- Mobile-responsive
+- Tailwind CSS v4
 
 ### 🏗️ Tech Stack
 - **Framework**: Next.js 15.5 with App Router
@@ -55,7 +75,7 @@ The setup script will:
 - Generate `.claude/.mcp.json`
 - Configure the project
 
-### 3. Initialize Supabase (if using)
+### 3. Initialize Supabase
 
 ```bash
 npm run init:supabase
@@ -71,16 +91,104 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📚 Documentation
+## 🔐 Authentication Setup
 
-- **[Database Autonomy Guide](.claude/AUTONOMOUS_DATABASE_WORKFLOW.md)** - Complete guide to autonomous database management
-- **[Quick Database Reference](.claude/QUICK_DB_REFERENCE.md)** - Quick reference for common operations
-- **[Setup Script](scripts/setup-project.mjs)** - Interactive project configuration
-- **[SQL Helper](scripts/supabase-sql-helper.mjs)** - Database helper utilities
+The template includes a **complete authentication system**:
 
-## 🎯 Usage Examples
+### Pages Included
+- `/` - Landing page
+- `/login` - Login page with glass morphism design
+- `/signup` - Signup page with email verification
+- `/dashboard` - Protected dashboard (requires auth)
 
-### Autonomous Database Modifications
+### How It Works
+
+1. **Middleware**: Automatically redirects unauthenticated users
+2. **Auth Hook**: `useAuth()` provides user state and signOut
+3. **Protected Routes**: Define in `middleware.ts`
+4. **Session Management**: Automatic session refresh
+
+### Example: Adding a Protected Route
+
+```typescript
+// In middleware.ts
+const protectedPaths = ['/dashboard', '/profile', '/settings'];
+```
+
+### Example: Using Auth in Components
+
+```tsx
+'use client';
+import { useAuth } from '@/lib/hooks/useAuth';
+
+export default function MyComponent() {
+  const { user, loading, signOut, isAuthenticated } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+  if (!isAuthenticated) return <div>Please login</div>;
+
+  return (
+    <div>
+      <p>Welcome {user.email}!</p>
+      <button onClick={signOut}>Sign Out</button>
+    </div>
+  );
+}
+```
+
+## 💻 Slash Commands
+
+Type these commands in Claude Code for instant productivity:
+
+- **`/commit`** - Quick commit with auto-generated message and push
+- **`/epct <feature>`** - Explore, Plan, Code, Test workflow for systematic feature implementation
+- **`/create-pr`** - Create PR with auto-generated title and description
+- **`/fix`** - Automatically detect and fix errors (TypeScript, ESLint, build)
+- **`/review`** - Comprehensive code review before committing
+
+### Example Usage
+
+```
+You: /commit
+Claude: Analyzing changes... Creating commit...
+        ✓ Committed: "feat: add user profile page"
+        ✓ Pushed to origin/main
+
+You: /epct add user preferences
+Claude: 🔍 EXPLORE: Researching user preferences patterns...
+        📋 PLAN: Creating implementation plan...
+        💻 CODE: Implementing feature...
+        🧪 TEST: Running tests...
+        ✓ Feature complete!
+```
+
+## 🎨 UI Design
+
+The template features a **modern 2025 design** with:
+
+### Glass Morphism
+```css
+background: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+```
+
+### Gradients
+```css
+background: linear-gradient(to br, #1f2937, #111827, #1f2937);
+```
+
+### Smooth Transitions
+```css
+transition: all 0.3s ease;
+transform: scale(1.02);
+```
+
+All pages use this design language for a consistent, modern look.
+
+## 🤖 Autonomous Database Management
+
+### Quick Example
 
 ```javascript
 import { sqlHelper } from './scripts/supabase-sql-helper.mjs';
@@ -113,14 +221,76 @@ await sqlHelper.runMigration(migration);
 await sqlHelper.regenerateTypes();
 ```
 
-### Using Slash Commands
+## 🔄 GitHub Actions
 
-When working with Claude Code, you can use these commands:
+The template includes **automated workflows**:
 
-- `/epct <feature>` - Explore, Plan, Code, Test workflow
-- `/explore <question>` - Deep codebase exploration
-- `/commit` - Quick commit with AI-generated message
-- `/create-pull-request` - Create PR with auto-generated description
+### CI Workflow
+- Runs on every push and PR
+- Lints code with ESLint
+- Type-checks with TypeScript
+- Builds the project
+- Uploads build artifacts
+
+### PR Auto-Assignment
+- Automatically assigns PR to creator
+- Adds size labels (small/medium/large/huge)
+- Adds category labels (documentation, auth, database, etc.)
+
+### How Claude Code Uses It
+
+When Claude creates a PR, GitHub Actions automatically:
+1. ✅ Run all checks
+2. ✅ Assign the PR
+3. ✅ Add labels
+4. ✅ Report status
+
+No manual intervention needed! 🎉
+
+## 📁 Project Structure
+
+```
+├── .github/
+│   ├── workflows/              # GitHub Actions
+│   │   ├── ci.yml             # CI/CD pipeline
+│   │   ├── auto-assign-pr.yml # Auto-assign PRs
+│   │   └── pr-label.yml       # Auto-label PRs
+│   └── labeler.yml            # Label configuration
+├── .claude/
+│   ├── .mcp.json              # MCP server configuration
+│   ├── commands/              # Slash commands
+│   │   ├── commit.md          # /commit command
+│   │   ├── epct.md            # /epct command
+│   │   ├── create-pr.md       # /create-pr command
+│   │   ├── fix.md             # /fix command
+│   │   └── review.md          # /review command
+├── scripts/
+│   ├── supabase-sql-helper.mjs # Database helper
+│   ├── setup-project.mjs       # Setup script
+│   └── init-supabase.mjs       # Supabase initialization
+├── src/
+│   ├── app/
+│   │   ├── login/             # Login page
+│   │   ├── signup/            # Signup page
+│   │   ├── dashboard/         # Protected dashboard
+│   │   ├── layout.tsx         # Root layout
+│   │   ├── page.tsx           # Landing page
+│   │   └── globals.css        # Global styles
+│   ├── components/
+│   │   └── auth/              # Auth components
+│   └── lib/
+│       ├── hooks/
+│       │   └── useAuth.ts     # Auth hook
+│       ├── supabase/
+│       │   ├── client.ts      # Supabase browser client
+│       │   └── server.ts      # Supabase server client
+│       └── types/
+│           └── generated.ts   # Auto-generated types
+├── middleware.ts              # Auth middleware
+├── .env.example               # Environment variables template
+├── .env.local                 # Your environment (gitignored)
+└── README.md
+```
 
 ## 🛠️ Available Scripts
 
@@ -135,115 +305,91 @@ npm run setup            # Interactive project setup
 npm run init:supabase    # Initialize Supabase with exec_sql function
 ```
 
-## 🔧 Configuration
-
-### Environment Variables
-
-Copy `.env.example` to `.env.local` and fill in your values:
-
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-SUPABASE_PROJECT_ID=your_project_id
-
-# N8N (optional)
-N8N_API_URL=https://n8n.yourdomain.com
-N8N_API_KEY=your_n8n_api_key
-```
-
-### MCP Servers
-
-MCP (Model Context Protocol) servers are configured in `.claude/.mcp.json`:
-
-- **Supabase MCP**: Direct database access for Claude Code
-- **N8N MCP**: Workflow automation integration
-
-## 📁 Project Structure
-
-```
-├── .claude/
-│   ├── .mcp.json                    # MCP server configuration
-│   ├── commands/                    # Slash commands
-│   ├── AUTONOMOUS_DATABASE_WORKFLOW.md
-│   └── QUICK_DB_REFERENCE.md
-├── scripts/
-│   ├── supabase-sql-helper.mjs     # Database helper
-│   ├── setup-project.mjs            # Setup script
-│   └── init-supabase.mjs            # Supabase initialization
-├── src/
-│   ├── app/                         # Next.js app directory
-│   ├── components/                  # React components
-│   └── lib/
-│       ├── supabase/                # Supabase clients
-│       └── types/
-│           └── generated.ts         # Auto-generated types
-├── .env.example                     # Environment variables template
-├── .env.local                       # Your environment (gitignored)
-├── package.json
-└── README.md
-```
-
-## 🎨 Claude Code Capabilities
-
-This template enables Claude Code to:
-
-### ✅ Database Management
-- Modify database schema autonomously
-- Create and alter tables
-- Add/remove/rename columns
-- Create indexes and constraints
-- Run complex migrations with validation
-- Test changes before applying
-
-### ✅ Development Workflow
-- Explore codebase thoroughly
-- Plan implementations before coding
-- Generate code following project patterns
-- Test implementations automatically
-- Create commits and pull requests
-- Fix issues based on PR comments
-
-### ✅ Automation
-- Execute N8N workflows
-- Query Supabase directly
-- Generate TypeScript types
-- Run tests and builds
-
-## 🌟 Why This Template?
+## 🎯 Why This Template?
 
 ### Traditional Development
-1. Claude suggests changes
-2. **You** manually update database in Supabase dashboard
-3. **You** manually regenerate types
-4. **You** update code
-5. **You** test
-6. **You** commit
+1. ❌ Claude suggests changes
+2. ❌ **You** manually update database in Supabase
+3. ❌ **You** manually create auth pages
+4. ❌ **You** manually configure CI/CD
+5. ❌ **You** manually regenerate types
+6. ❌ **You** commit and push
 
 ### With This Template
-1. **Claude** explores codebase
-2. **Claude** plans changes
-3. **Claude** updates database autonomously
-4. **Claude** regenerates types
-5. **Claude** updates code
-6. **Claude** tests
-7. **Claude** commits
+1. ✅ **Claude** explores codebase
+2. ✅ **Claude** updates database autonomously
+3. ✅ **Auth system** ready out of the box
+4. ✅ **GitHub Actions** configured
+5. ✅ **Claude** regenerates types
+6. ✅ **Claude** uses `/commit` command
 
-**Result**: 10x faster development, fewer errors, consistent patterns!
+**Result**: **10x faster development**, fewer errors, consistent patterns! 🚀
+
+## 🎨 Design Showcase
+
+### Login Page
+- Glass morphism card
+- Gradient background
+- Smooth animations
+- Error handling
+- Redirect after login
+
+### Dashboard
+- Protected route
+- User info display
+- Stats cards with glass effect
+- Sign out button
+- Modern layout
+
+### Responsive
+- Mobile-first design
+- Works on all screen sizes
+- Touch-friendly
 
 ## 🔐 Security
 
-- Service role keys are kept in `.env.local` (gitignored)
-- Readonly mode for SELECT queries prevents accidental modifications
-- Pre/post validation in migrations
-- Automatic rollback on errors
+- ✅ Service role keys in `.env.local` (gitignored)
+- ✅ Readonly mode for SELECT queries
+- ✅ Pre/post validation in migrations
+- ✅ Automatic rollback on errors
+- ✅ Middleware protection for routes
+- ✅ Session management
+- ✅ Email verification
+
+## 📚 Documentation
+
+- **[Database Autonomy Guide](.claude/AUTONOMOUS_DATABASE_WORKFLOW.md)** - Complete guide (coming soon)
+- **[Quick Database Reference](.claude/QUICK_DB_REFERENCE.md)** - Quick reference (coming soon)
+- **Slash Commands** - See `.claude/commands/` directory
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+Set environment variables in Vercel dashboard:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_PROJECT_ID`
+
+### Other Platforms
+- **Netlify**: Works out of the box
+- **Railway**: Configure environment variables
+- **AWS Amplify**: Add build settings
 
 ## 🤝 Contributing
 
-Contributions are welcome! This template is designed to be:
-- **Extensible**: Add your own commands, helpers, and patterns
-- **Customizable**: Adapt to your specific needs
+Contributions welcome! This template is designed to be:
+- **Extensible**: Add your own commands and patterns
+- **Customizable**: Adapt to your needs
 - **Shareable**: Use as a base for your projects
 
 ## 📝 License
@@ -257,8 +403,33 @@ MIT License - feel free to use this template for any project!
 - Database by [Supabase](https://supabase.com/)
 - Automation by [N8N](https://n8n.io/)
 
+## 🎁 What's Included
+
+- ✅ Next.js 15 with App Router
+- ✅ TypeScript strict mode
+- ✅ Tailwind CSS v4
+- ✅ Complete authentication system
+- ✅ Glass morphism design
+- ✅ Database autonomy tools
+- ✅ 5 slash commands
+- ✅ GitHub Actions CI/CD
+- ✅ MCP server configuration
+- ✅ Interactive setup script
+- ✅ Auto-generated types
+- ✅ Protected routes middleware
+- ✅ Auth hooks
+- ✅ Modern UI components
+
+## 🌟 Star History
+
+If you find this template useful, please consider giving it a star ⭐
+
 ---
 
 **Made with ❤️ by [Maxime Nollevaux](https://github.com/MaximeNollevaux)**
 
 Start building amazing things with AI-assisted development! 🚀
+
+**Questions?** Open an issue or discussion on GitHub.
+
+**Need help?** Check the documentation in `.claude/` directory.

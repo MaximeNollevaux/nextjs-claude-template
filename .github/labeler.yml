@@ -1,0 +1,41 @@
+# Auto-labeling configuration for PRs
+
+'documentation':
+  - '**/*.md'
+  - 'docs/**/*'
+
+'dependencies':
+  - 'package.json'
+  - 'package-lock.json'
+  - 'yarn.lock'
+  - 'pnpm-lock.yaml'
+
+'configuration':
+  - '*.config.*'
+  - '.github/**/*'
+  - 'tsconfig.json'
+  - '.env.example'
+
+'database':
+  - 'scripts/supabase-*'
+  - 'scripts/*migration*'
+  - 'src/lib/supabase/**/*'
+
+'authentication':
+  - 'src/app/login/**/*'
+  - 'src/app/signup/**/*'
+  - 'middleware.ts'
+  - 'src/lib/hooks/useAuth.ts'
+
+'ui/components':
+  - 'src/components/**/*'
+
+'pages':
+  - 'src/app/**/page.tsx'
+
+'api':
+  - 'src/app/api/**/*'
+
+'claude-code':
+  - '.claude/**/*'
+  - 'scripts/**/*'
