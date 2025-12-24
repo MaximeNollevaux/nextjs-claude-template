@@ -8,7 +8,7 @@
     "dev:bun": "bun --bun next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "gen:types": "npx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/lib/types/generated.ts",
     "setup": "node scripts/setup-project.mjs",
     "init:supabase": "node scripts/init-supabase.mjs"
@@ -40,6 +40,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
