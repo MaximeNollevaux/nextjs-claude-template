@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "gen:types": "npx supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/lib/types/generated.ts",
     "setup": "node scripts/setup-project.mjs",
-    "init:supabase": "node scripts/init-supabase.mjs"
+    "init:supabase": "node scripts/init-supabase.mjs",
+    "modules:apply": "node scripts/modules-apply.mjs",
+    "modules:list": "node scripts/modules-list.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
