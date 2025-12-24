@@ -1,7 +1,7 @@
 {
   "name": "nextjs-claude-template",
-  "version": "1.1.0",
-  "description": "Next.js template with Claude Code superpowers - Database autonomy, complete auth, modern UI components",
+  "version": "2.0.0",
+  "description": "Next.js template with Claude Code superpowers - Complete UI library, animations, auth, database autonomy",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -15,14 +15,20 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-radio-group": "^1.2.1",
+    "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-switch": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.1",
     "@supabase/supabase-js": "^2.48.0",
     "@supabase/ssr": "^0.5.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "dotenv": "^16.4.5",
+    "framer-motion": "^11.15.0",
     "lucide-react": "^0.469.0",
     "next": "15.5.0",
     "react": "^19.0.0",
@@ -52,9 +58,10 @@
     "supabase",
     "authentication",
     "ui-components",
+    "framer-motion",
+    "animations",
     "template",
-    "boilerplate",
-    "2025-design"
+    "boilerplate"
   ],
   "author": "Maxime Nollevaux",
   "license": "MIT",
