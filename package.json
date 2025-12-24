@@ -1,7 +1,7 @@
 {
   "name": "nextjs-claude-template",
-  "version": "1.0.0",
-  "description": "Next.js template with Claude Code superpowers - Database autonomy, N8N integration, custom commands & agents",
+  "version": "1.1.0",
+  "description": "Next.js template with Claude Code superpowers - Database autonomy, complete auth, modern UI components",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -14,12 +14,23 @@
     "init:supabase": "node scripts/init-supabase.mjs"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.1",
     "@supabase/supabase-js": "^2.48.0",
     "@supabase/ssr": "^0.5.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.0.0",
     "dotenv": "^16.4.5",
+    "lucide-react": "^0.469.0",
     "next": "15.5.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "sonner": "^1.7.1",
+    "tailwind-merge": "^2.6.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -39,20 +50,16 @@
     "nextjs",
     "claude-code",
     "supabase",
-    "n8n",
+    "authentication",
+    "ui-components",
     "template",
     "boilerplate",
-    "autonomous",
-    "ai-assisted"
+    "2025-design"
   ],
   "author": "Maxime Nollevaux",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/MaximeNollevaux/nextjs-claude-template.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MaximeNollevaux/nextjs-claude-template/issues"
-  },
-  "homepage": "https://github.com/MaximeNollevaux/nextjs-claude-template#readme"
+  }
 }
