@@ -49,9 +49,6 @@ next-env.d.ts
 test-*.mjs
 temp_*.sql
 
-# Project-specific (generated during setup)
-src/lib/types/generated.ts
-
 # Supabase
 supabase/.branches
 supabase/.temp
